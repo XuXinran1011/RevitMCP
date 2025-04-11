@@ -1,0 +1,14 @@
+D:\MyPrograms\RevitMCP\RevitMCP.Plugin\bin\Debug\net8.0\RevitMCP.Plugin.deps.json
+D:\MyPrograms\RevitMCP\RevitMCP.Plugin\bin\Debug\net8.0\RevitMCP.Plugin.dll
+D:\MyPrograms\RevitMCP\RevitMCP.Plugin\bin\Debug\net8.0\RevitMCP.Plugin.pdb
+D:\MyPrograms\RevitMCP\RevitMCP.Plugin\bin\Debug\net8.0\RevitMCP.Shared.dll
+D:\MyPrograms\RevitMCP\RevitMCP.Plugin\bin\Debug\net8.0\RevitMCP.Shared.pdb
+D:\MyPrograms\RevitMCP\RevitMCP.Plugin\obj\Debug\net8.0\RevitMCP.Plugin.csproj.AssemblyReference.cache
+D:\MyPrograms\RevitMCP\RevitMCP.Plugin\obj\Debug\net8.0\RevitMCP.Plugin.GeneratedMSBuildEditorConfig.editorconfig
+D:\MyPrograms\RevitMCP\RevitMCP.Plugin\obj\Debug\net8.0\RevitMCP.Plugin.csproj.CoreCompileInputs.cache
+D:\MyPrograms\RevitMCP\RevitMCP.Plugin\obj\Debug\net8.0\RevitMCP.Plugin.sourcelink.json
+D:\MyPrograms\RevitMCP\RevitMCP.Plugin\obj\Debug\net8.0\RevitMCP.0623AEA5.Up2Date
+D:\MyPrograms\RevitMCP\RevitMCP.Plugin\obj\Debug\net8.0\RevitMCP.Plugin.dll
+D:\MyPrograms\RevitMCP\RevitMCP.Plugin\obj\Debug\net8.0\refint\RevitMCP.Plugin.dll
+D:\MyPrograms\RevitMCP\RevitMCP.Plugin\obj\Debug\net8.0\RevitMCP.Plugin.pdb
+D:\MyPrograms\RevitMCP\RevitMCP.Plugin\obj\Debug\net8.0\ref\RevitMCP.Plugin.dll

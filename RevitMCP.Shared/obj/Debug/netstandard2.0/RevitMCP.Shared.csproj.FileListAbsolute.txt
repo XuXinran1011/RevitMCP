@@ -1,0 +1,11 @@
+D:\MyPrograms\RevitMCP\RevitMCP.Shared\obj\Debug\netstandard2.0\RevitMCP.Shared.csproj.AssemblyReference.cache
+D:\MyPrograms\RevitMCP\RevitMCP.Shared\obj\Debug\netstandard2.0\RevitMCP.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\MyPrograms\RevitMCP\RevitMCP.Shared\obj\Debug\netstandard2.0\RevitMCP.Shared.AssemblyInfoInputs.cache
+D:\MyPrograms\RevitMCP\RevitMCP.Shared\obj\Debug\netstandard2.0\RevitMCP.Shared.AssemblyInfo.cs
+D:\MyPrograms\RevitMCP\RevitMCP.Shared\obj\Debug\netstandard2.0\RevitMCP.Shared.csproj.CoreCompileInputs.cache
+D:\MyPrograms\RevitMCP\RevitMCP.Shared\obj\Debug\netstandard2.0\RevitMCP.Shared.sourcelink.json
+D:\MyPrograms\RevitMCP\RevitMCP.Shared\bin\Debug\netstandard2.0\RevitMCP.Shared.deps.json
+D:\MyPrograms\RevitMCP\RevitMCP.Shared\bin\Debug\netstandard2.0\RevitMCP.Shared.dll
+D:\MyPrograms\RevitMCP\RevitMCP.Shared\bin\Debug\netstandard2.0\RevitMCP.Shared.pdb
+D:\MyPrograms\RevitMCP\RevitMCP.Shared\obj\Debug\netstandard2.0\RevitMCP.Shared.dll
+D:\MyPrograms\RevitMCP\RevitMCP.Shared\obj\Debug\netstandard2.0\RevitMCP.Shared.pdb

@@ -1,0 +1,15 @@
+D:\MyPrograms\RevitMCP\TestConsole\bin\Debug\net8.0\TestConsole.exe
+D:\MyPrograms\RevitMCP\TestConsole\bin\Debug\net8.0\TestConsole.deps.json
+D:\MyPrograms\RevitMCP\TestConsole\bin\Debug\net8.0\TestConsole.runtimeconfig.json
+D:\MyPrograms\RevitMCP\TestConsole\bin\Debug\net8.0\TestConsole.dll
+D:\MyPrograms\RevitMCP\TestConsole\bin\Debug\net8.0\TestConsole.pdb
+D:\MyPrograms\RevitMCP\TestConsole\obj\Debug\net8.0\TestConsole.GeneratedMSBuildEditorConfig.editorconfig
+D:\MyPrograms\RevitMCP\TestConsole\obj\Debug\net8.0\TestConsole.AssemblyInfoInputs.cache
+D:\MyPrograms\RevitMCP\TestConsole\obj\Debug\net8.0\TestConsole.AssemblyInfo.cs
+D:\MyPrograms\RevitMCP\TestConsole\obj\Debug\net8.0\TestConsole.csproj.CoreCompileInputs.cache
+D:\MyPrograms\RevitMCP\TestConsole\obj\Debug\net8.0\TestConsole.sourcelink.json
+D:\MyPrograms\RevitMCP\TestConsole\obj\Debug\net8.0\TestConsole.dll
+D:\MyPrograms\RevitMCP\TestConsole\obj\Debug\net8.0\refint\TestConsole.dll
+D:\MyPrograms\RevitMCP\TestConsole\obj\Debug\net8.0\TestConsole.pdb
+D:\MyPrograms\RevitMCP\TestConsole\obj\Debug\net8.0\TestConsole.genruntimeconfig.cache
+D:\MyPrograms\RevitMCP\TestConsole\obj\Debug\net8.0\ref\TestConsole.dll

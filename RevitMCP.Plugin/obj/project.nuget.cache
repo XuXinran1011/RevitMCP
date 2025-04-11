@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "5iDyx8/7mpY=",
+  "success": true,
+  "projectFilePath": "D:\\MyPrograms\\RevitMCP\\RevitMCP.Plugin\\RevitMCP.Plugin.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Administrator\\.nuget\\packages\\system.io.pipelines\\9.0.4\\system.io.pipelines.9.0.4.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\system.text.encodings.web\\9.0.4\\system.text.encodings.web.9.0.4.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\system.text.json\\9.0.4\\system.text.json.9.0.4.nupkg.sha512"
+  ],
+  "logs": []
+}
