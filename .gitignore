@@ -1,0 +1,63 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
+TestResults/
+publish/
+out/
+*.nupkg
+
+# Revit/Autodesk
+*.rvt
+*.rfa
+*.rte
+*.rft
+*.bak
+*.log
+
+# NuGet
+*.nupkg
+.nuget/
+packages/
+*.snupkg
+
+# OS files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Rider
+.idea/
+*.sln.iml
+
+# Python/Node/Other
+__pycache__/
+node_modules/
+
+# CI/CD
+*.trx
+*.coverage
+*.TestResults
+
+# 不上传Revit官方DLL，仅本地引用
+References/RevitAPI.dll
+References/RevitAPIUI.dll
+
+# 个人/临时文件
+*.tmp
+*.temp
+*.swp
+*.bak
+*.old
+
+# 文档自动生成目录
+docs/_site/ 

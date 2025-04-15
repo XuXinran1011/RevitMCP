@@ -1,0 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+仅进行文档写作，不进行代码开发。
+
+调查信息时，调用Sequential-thinking和Playwright-mcp
