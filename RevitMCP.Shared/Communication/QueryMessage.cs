@@ -10,11 +10,11 @@ namespace RevitMCP.Shared.Communication
         /// <summary>
         /// 查询文本（如自然语言指令）
         /// </summary>
-        public string QueryText { get; set; }
+        public string QueryText { get; set; } = string.Empty;
 
         /// <summary>
         /// 可选参数（如元素类型、尺寸等）
         /// </summary>
-        public Dictionary<string, object> Parameters { get; set; }
+        public Dictionary<string, object> Parameters { get; set; } = new();
     }
 } 

@@ -13,11 +13,11 @@ namespace RevitMCP.Shared.Communication
         /// <summary>
         /// 结果消息（如错误、提示等）
         /// </summary>
-        public string Message { get; set; }
+        public string Message { get; set; } = string.Empty;
 
         /// <summary>
         /// 结果数据（可为任意对象，序列化为JSON）
         /// </summary>
-        public object Data { get; set; }
+        public object? Data { get; set; }
     }
 } 

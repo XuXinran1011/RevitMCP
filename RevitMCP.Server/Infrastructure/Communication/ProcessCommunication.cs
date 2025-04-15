@@ -29,7 +29,12 @@ namespace RevitMCP.Server.Infrastructure.Communication
             {
                 string line = await _reader.ReadLineAsync();
                 if (string.IsNullOrWhiteSpace(line)) continue;
-                var query = JsonSerializer.Deserialize<QueryMessage>(line);
+                QueryMessage? query = JsonSerializer.Deserialize<QueryMessage>(line);
+                if (query == null)
+                {
+                    // TODO: 可记录日志或返回错误响应
+                    continue;
+                }
                 var response = HandleQuery(query);
                 string respJson = JsonSerializer.Serialize(response);
                 await _writer.WriteLineAsync(respJson);

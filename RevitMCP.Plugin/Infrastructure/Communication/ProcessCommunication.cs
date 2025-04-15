@@ -27,16 +27,17 @@ namespace RevitMCP.Plugin.Infrastructure.Communication
         /// <summary>
         /// 发送QueryMessage并等待ResponseMessage。
         /// </summary>
-        public async Task<ResponseMessage> SendQueryAsync(QueryMessage query)
+        public async Task<ResponseMessage?> SendQueryAsync(QueryMessage query)
         {
             string json = JsonSerializer.Serialize(query);
             await _writer.WriteLineAsync(json);
             await _writer.FlushAsync();
 
-            string responseLine = await _reader.ReadLineAsync();
+            string? responseLine = await _reader.ReadLineAsync();
             if (string.IsNullOrWhiteSpace(responseLine))
                 return null;
-            return JsonSerializer.Deserialize<ResponseMessage>(responseLine);
+            var response = JsonSerializer.Deserialize<ResponseMessage>(responseLine);
+            return response;
         }
     }
 } 
