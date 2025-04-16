@@ -3,7 +3,7 @@ using System;
 namespace RevitMCP.Shared.Models
 {
     /// <summary>
-    /// 表示Revit参数的基础信息，适用于跨进程通信和序列化。
+    /// Revit参数信息模型，描述单个参数的基础属性，支持序列化和跨端传输。
     /// </summary>
     public class RevitParameterInfo
     {
@@ -26,5 +26,10 @@ namespace RevitMCP.Shared.Models
         /// 单位（如毫米、平方米等，可选）。
         /// </summary>
         public string? Unit { get; set; }
+
+        /// <summary>
+        /// 参数描述（可选）。
+        /// </summary>
+        public string? Description { get; set; }
     }
 } 

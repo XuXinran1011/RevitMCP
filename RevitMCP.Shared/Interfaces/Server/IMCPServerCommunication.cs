@@ -1,3 +1,5 @@
+using RevitMCP.Shared.Models;
+
 namespace RevitMCP.Shared.Interfaces.Server
 {
     /// <summary>

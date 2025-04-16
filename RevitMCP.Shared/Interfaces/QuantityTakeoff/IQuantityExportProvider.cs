@@ -1,3 +1,6 @@
+using RevitMCP.Shared.Models.QuantityTakeoff;
+using System.Collections.Generic;
+
 namespace RevitMCP.Shared.Interfaces.QuantityTakeoff
 {
     /// <summary>

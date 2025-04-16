@@ -1,3 +1,6 @@
+using RevitMCP.Shared.Models;
+using System.Collections.Generic;
+
 namespace RevitMCP.Shared.Interfaces.Server
 {
     /// <summary>
