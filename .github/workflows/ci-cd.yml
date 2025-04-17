@@ -42,7 +42,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: TestResults-$(Agent.OS)-$(DOTNET_VERSION)
+          name: TestResults-${{ matrix.dotnet-version }}
           path: '**/TestResults/*.trx'
 
   package:
