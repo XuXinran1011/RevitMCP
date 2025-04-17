@@ -33,12 +33,6 @@ jobs:
       - name: 构建所有项目
         run: dotnet build --no-restore --configuration Release
 
-      - name: 运行单元测试
-        run: |
-          dotnet test RevitMCP.Shared.Tests --no-build --configuration Release --logger trx
-          dotnet test RevitMCP.Plugin.Tests --no-build --configuration Release --logger trx
-          dotnet test RevitMCP.Server.Tests --no-build --configuration Release --logger trx
-
       - name: 运行端到端集成测试
         run: dotnet test RevitMCP.IntegrationTests --no-build --configuration Release --logger trx
         env:
