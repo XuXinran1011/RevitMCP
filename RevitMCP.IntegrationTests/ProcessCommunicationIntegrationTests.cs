@@ -10,18 +10,35 @@ namespace RevitMCP.IntegrationTests
 {
     public class ProcessCommunicationIntegrationTests
     {
-        // TODO: 可通过配置文件或环境变量指定Server可执行文件路径
-        private const string ServerExePath = @"D:\MyPrograms\RevitMCP.Server\bin\Debug\net9.0\RevitMCP.Server.exe";
+        // 优先用环境变量，次选自动拼接当前配置路径
+        private static string GetServerExePath()
+        {
+            var envPath = Environment.GetEnvironmentVariable("SERVER_EXE_PATH");
+            if (!string.IsNullOrWhiteSpace(envPath) && File.Exists(envPath))
+                return envPath;
+            // 自动根据当前测试配置(Debug/Release)拼接路径
+            var config = Environment.GetEnvironmentVariable("CONFIGURATION") ?? "Debug";
+            var solutionRoot = AppContext.BaseDirectory;
+            // 向上查找解决方案根目录
+            var dir = new DirectoryInfo(solutionRoot);
+            while (dir != null && !File.Exists(Path.Combine(dir.FullName, "RevitMCP.sln")))
+                dir = dir.Parent;
+            if (dir == null)
+                throw new DirectoryNotFoundException("未找到解决方案根目录");
+            var exePath = Path.Combine(dir.FullName, "RevitMCP.Server", "bin", config, "net9.0", "RevitMCP.Server.exe");
+            return exePath;
+        }
 
         [Fact(DisplayName = "Plugin与Server端到端Ping-Pong通信")] 
         public async Task PluginServer_PingPong_Success()
         {
-            if (!File.Exists(ServerExePath))
-                throw new FileNotFoundException($"未找到Server可执行文件: {ServerExePath}");
+            var serverExePath = GetServerExePath();
+            if (!File.Exists(serverExePath))
+                throw new FileNotFoundException($"未找到Server可执行文件: {serverExePath}");
 
             var processStartInfo = new ProcessStartInfo
             {
-                FileName = ServerExePath,
+                FileName = serverExePath,
                 RedirectStandardInput = true,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
