@@ -33,10 +33,15 @@ jobs:
       - name: 构建所有项目
         run: dotnet build --no-restore --configuration Release
 
-      - name: 运行端到端集成测试
-        run: dotnet test RevitMCP.IntegrationTests --no-build --configuration Release --logger trx
+      - name: 运行端到端集成测试并收集覆盖率
+        run: dotnet test RevitMCP.IntegrationTests --no-build --configuration Release --logger trx --collect:"XPlat Code Coverage"
         env:
           SERVER_EXE_PATH: ${{ env.SERVER_EXE_PATH }}
+
+      - name: 生成覆盖率报告
+        run: |
+          dotnet tool install -g dotnet-reportgenerator-globaltool
+          reportgenerator -reports:**/TestResults/**/coverage.cobertura.xml -targetdir:CoverageReport -reporttypes:Html
 
       - name: 上传测试报告
         if: always()
@@ -44,6 +49,25 @@ jobs:
         with:
           name: TestResults-${{ matrix.dotnet-version }}
           path: '**/TestResults/*.trx'
+
+      - name: 上传覆盖率报告
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report-${{ matrix.dotnet-version }}
+          path: CoverageReport/
+
+      - name: 安装 DocFX
+        run: dotnet tool install -g docfx
+
+      - name: 生成API文档
+        run: docfx docs/docfx.json
+
+      - name: 上传API文档
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-docs-${{ matrix.dotnet-version }}
+          path: docs/_site/
 
   package:
     runs-on: windows-latest

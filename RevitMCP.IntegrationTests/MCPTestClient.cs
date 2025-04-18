@@ -45,11 +45,17 @@ namespace RevitMCP.IntegrationTests
                     data = null;
                     break;
                 case "GetFamilyById":
-                    data = new FamilyMetadata {
-                        Id = "fam-001",
-                        Name = "TestFamily",
-                        Category = "Doors"
-                    };
+                    data = new FamilyMetadata(
+                        "fam-001",
+                        "TestFamily",
+                        "Doors",
+                        new List<string>(),
+                        new Dictionary<string, Parameter>(),
+                        null,
+                        null,
+                        null,
+                        DateTime.Now
+                    );
                     break;
                 default:
                     return Task.FromResult(new ResponseMessage {

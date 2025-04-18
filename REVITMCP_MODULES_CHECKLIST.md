@@ -177,9 +177,9 @@
 
 | 文件路径 | 描述 | 优先级 | 依赖项 | 技术细节 | 状态 |
 |---------|------|--------|-------|----------|------|
-| `Models/RevitElementInfo.cs` | Revit元素信息模型 | 高 | 无 | 轻量级DTO、序列化友好 | ⬜ 未开始 |
-| `Models/RevitParameterInfo.cs` | Revit参数信息模型 | 高 | 无 | 值类型包装、不可变性 | ⬜ 未开始 |
-| `Models/RevitCategoryInfo.cs` | Revit类别信息模型 | 高 | 无 | 枚举映射、类别层次 | ⬜ 未开始 |
+| `Models/RevitElementInfo.cs` | Revit元素信息模型 | 高 | 无 | 轻量级DTO、序列化友好 | ✓ 已完成 |
+| `Models/RevitParameterInfo.cs` | Revit参数信息模型 | 高 | 无 | 值类型包装、不可变性 | ✓ 已完成 |
+| `Models/RevitCategoryInfo.cs` | Revit类别信息模型 | 高 | 无 | 枚举映射、类别层次 | ✓ 已完成 |
 | `Models/RevitProjectInfo.cs` | Revit项目信息模型 | 中 | 无 | 轻量级项目元数据 | ⬜ 未开始 |
 | `Models/GeometryInfo.cs` | 几何信息模型 | 中 | 无 | 坐标系统、几何数据 | ⬜ 未开始 |
 | `Models/ResponseMessage.cs` | 通用响应消息模型 | 高 | 无 | 跨进程通信响应格式 | ⬜ 未开始 |
@@ -192,7 +192,7 @@
 
 | 文件路径 | 描述 | 优先级 | 依赖项 | 技术细节 | 状态 |
 |---------|------|--------|-------|----------|------|
-| `Interfaces/IRevitElement.cs` | Revit元素接口 | 高 | 无 | 跨项目契约、抽象能力 | ⬜ 未开始 |
+| `Interfaces/IRevitElement.cs` | Revit元素接口 | 高 | 无 | 跨项目契约、抽象能力 | ✓ 已完成 |
 | `Interfaces/IRevitParameter.cs` | Revit参数接口 | 高 | 无 | 参数操作抽象、类型安全 | ⬜ 未开始 |
 | `Interfaces/IRevitCategory.cs` | Revit类别接口 | 高 | 无 | 类别层次结构抽象 | ⬜ 未开始 |
 | `Interfaces/IGeometryProvider.cs` | 几何提供者接口 | 中 | 无 | 几何数据访问抽象 | ⬜ 未开始 |
@@ -207,7 +207,7 @@
 
 | 文件路径 | 描述 | 优先级 | 依赖项 | 技术细节 | 状态 |
 |---------|------|--------|-------|----------|------|
-| `Communication/MCPMessage.cs` | MCP消息类 | 高 | 无 | 消息结构、序列化注解 | ⬜ 未开始 |
+| `Communication/MCPMessage.cs` | MCP消息类 | 高 | 无 | 消息结构、序列化注解 | ✓ 已完成 |
 | `Communication/RevitCommandMessage.cs` | Revit命令消息 | 高 | 无 | 命令模式、序列化 | ⬜ 未开始 |
 | `Communication/RevitQueryMessage.cs` | Revit查询消息 | 高 | 无 | 查询模式、序列化 | ⬜ 未开始 |
 | `Communication/MessageEnvelope.cs` | 消息信封 | 中 | 无 | 包装消息、元数据 | ⬜ 未开始 |
@@ -250,7 +250,7 @@
 |---------|------|--------|-------|----------|------|
 | `Shared/Models/RevitElementInfoTests.cs` | 元素信息模型测试 | 高 | RevitElementInfo | xUnit、对象属性验证 | ⬜ 未开始 |
 | `Shared/Models/ResponseMessageTests.cs` | 响应消息模型测试 | 高 | ResponseMessage | xUnit、序列化测试 | ⬜ 未开始 |
-| `Shared/Communication/MCPMessageTests.cs` | MCP消息测试 | 高 | MCPMessage | xUnit、消息结构测试 | ⬜ 未开始 |
+| `Shared/Communication/MCPMessageTests.cs` | MCP消息测试 | 高 | MCPMessage | xUnit、消息结构测试 | ✓ 已完成 |
 | `Shared/Utilities/SerializationHelperTests.cs` | 序列化工具测试 | 高 | SerializationHelper | xUnit、序列化兼容性测试 | ⬜ 未开始 |
 | `Shared/QuantityTakeoff/QuantityInfoTests.cs` | 工程量信息模型测试 | 低 | QuantityInfo | xUnit、数据完整性测试 | ⬜ 未开始 |
 | `Shared/QuantityTakeoff/QuantityUnitTests.cs` | 工程量单位测试 | 低 | QuantityUnit | xUnit、单位转换测试 | ⬜ 未开始 |
@@ -274,7 +274,7 @@
 | `Plugin/Domain/Models/RevitElementTests.cs` | 元素模型测试 | 高 | RevitElement | xUnit、实体验证 | ⬜ 未开始 |
 | `Plugin/Domain/Services/RevitElementServiceTests.cs` | 元素服务测试 | 高 | RevitElementService、MockElementRepository | xUnit、服务验证 | ⬜ 未开始 |
 | `Plugin/Application/Commands/StartMCPCommandTests.cs` | 启动MCP命令测试 | 中 | StartMCPCommand、MockMCPServerCommunication | xUnit、命令执行验证 | ⬜ 未开始 |
-| `Plugin/Infrastructure/Communication/ProcessCommunicationTests.cs` | 进程通信测试 | 高 | ProcessCommunication、MockServerProcess | xUnit、IPC通信测试 | ⬜ 未开始 |
+| `Plugin/Infrastructure/Communication/ProcessCommunicationTests.cs` | 进程通信测试 | 高 | ProcessCommunication、MockServerProcess | xUnit、IPC通信测试 | ✓ 已完成 |
 | `Plugin/Domain/Services/QuantityTakeoff/ParameterCalculatorTests.cs` | 参数计算器测试 | 低 | ParameterCalculator、MockElementRepository | xUnit、计算逻辑测试 | ⬜ 未开始 |
 | `Plugin/Domain/Services/QuantityTakeoff/GeometryCalculatorTests.cs` | 几何计算器测试 | 低 | GeometryCalculator、MockElementRepository | xUnit、几何计算测试 | ⬜ 未开始 |
 | `Plugin/Domain/Services/QuantityTakeoff/HybridCalculatorTests.cs` | 混合计算器测试 | 低 | HybridCalculator、MockQuantityCalculator | xUnit、策略选择测试 | ⬜ 未开始 |
@@ -285,7 +285,7 @@
 | 文件路径 | 描述 | 优先级 | 依赖项 | 技术细节 | 状态 |
 |---------|------|--------|-------|----------|------|
 | `Integration/Plugin/RevitElementRepositoryIntegrationTests.cs` | 元素仓储集成测试 | 高 | RevitElementRepository、MockRevitAPIAdapter | xUnit、仓储与模拟适配器集成 | ⬜ 未开始 |
-| `Integration/Communication/IPCCommunicationTests.cs` | IPC通信集成测试 | 高 | ProcessCommunication、IPCProtocol | xUnit、实际进程间通信测试 | ⬜ 未开始 |
+| `Integration/Communication/IPCCommunicationTests.cs` | IPC通信集成测试 | 高 | ProcessCommunication、IPCProtocol | xUnit、实际进程间通信测试 | ✓ 已完成 |
 | `Integration/Plugin/RevitApiAdapterIntegrationTests.cs` | Revit API适配器集成测试 | 中 | RevitAPIAdapter、RevitTestFramework | RevitTestFramework、API调用验证 | ⬜ 未开始 |
 | `Integration/QuantityTakeoff/QuantityCalculationIntegrationTests.cs` | 工程量计算集成测试 | 低 | QuantityTakeoffService、MockElementRepository | xUnit、跨层计算测试 | ⬜ 未开始 |
 | `Integration/QuantityTakeoff/ExportIntegrationTests.cs` | 工程量导出集成测试 | 低 | QuantityExporter、MockFileSystem | xUnit、文件生成测试 | ⬜ 未开始 |
@@ -307,6 +307,16 @@
 | `TestHelpers/TestProcessRunner.cs` | 测试进程运行器 | 高 | 无 | 进程启动、IPC测试辅助 | ⬜ 未开始 |
 | `TestHelpers/QuantityTakeoff/TestQuantityModels.cs` | 工程量测试模型 | 低 | 无 | 工程量测试数据、模型生成 | ⬜ 未开始 |
 | `TestHelpers/QuantityTakeoff/QuantityAssertions.cs` | 工程量断言助手 | 低 | FluentAssertions | 专用断言、误差容忍、单位转换 | ⬜ 未开始 |
+
+### 命令扩展/自定义脚本注册相关模块（优先级最低，后续扩展阶段）
+
+| 文件路径 | 描述 | 优先级 | 依赖项 | 技术细节 | 状态 |
+|---------|------|--------|-------|----------|------|
+| `Application/Services/CommandExtensionService.cs` | 命令扩展服务 | 最低 | ICommandExtension | 插件/脚本注册、动态发现 | ⬜ 未开始 |
+| `Domain/Interfaces/ICommandExtension.cs` | 命令扩展接口 | 最低 | 无 | 标准化扩展点 | ⬜ 未开始 |
+| `Domain/Models/CommandMetadata.cs` | 命令元数据描述 | 最低 | 无 | 参数、类型、权限、UI描述 | ⬜ 未开始 |
+| `Infrastructure/Scripting/ScriptCommandLoader.cs` | 脚本命令加载器 | 最低 | CommandExtensionService | 脚本解析、元数据提取 | ⬜ 未开始 |
+| `Infrastructure/Plugin/PluginManager.cs` | 插件管理器 | 最低 | CommandExtensionService | 生命周期、权限、隔离 | ⬜ 未开始 |
 
 ```csharp
 // 在测试项目中的模拟实现
@@ -469,3 +479,51 @@ public class MockMCPServerCommunication : IMCPServerCommunication
 - ⬜ 高级通信特性 (断线重连、大消息分片处理等)
 - ⬜ Revit UI线程适配优化 
 - ⬜ 性能压力测试
+
+## 4.4 命令字典/LLM Schema自动导出模块
+
+该模块负责自动导出和同步命令字典/LLM Schema，确保LLM与Server端参数表一致，支持自然语言驱动的智能建模。
+
+| 文件路径 | 描述 | 优先级 | 依赖项 | 技术细节 | 状态 |
+|----------|------|--------|--------|----------|------|
+| `Shared/Tools/CommandSchemaExporter.cs` | 命令字典/LLM Schema自动导出工具 | 高 | FamilyMetadata、族库管理模块 | 自动扫描族库，导出结构化Schema（JSON/Markdown），支持API/命令行触发 | ⬜ 未开始 |
+
+### 领域模型
+- CommandSchema：命令Schema定义，包含ElementType、FamilyName、参数定义、更新时间等。
+- ParameterDefinition：参数定义，包含名称、类型、单位、必填、描述等。
+
+### 领域服务接口
+- ICommandSchemaExportService：命令Schema导出服务接口，支持获取所有Schema和导出Schema文件。
+- SchemaExportFormat：导出格式（Json/Markdown）。
+
+### 应用服务
+- CommandSchemaExportHandler：命令Schema导出处理器，负责调用导出服务完成Schema导出。
+
+### 基础设施实现
+- JsonCommandSchemaExporter：JSON格式Schema导出实现，自动扫描族库并导出结构化Schema。
+
+### 典型导出格式
+```json
+{
+  "Wall": {
+    "Parameters": {
+      "Length": { "Type": "number", "Unit": "mm", "Required": true, "Description": "墙体长度" },
+      "Height": { "Type": "number", "Unit": "mm", "Required": true, "Description": "墙体高度" },
+      "Thickness": { "Type": "number", "Unit": "mm", "Required": false, "Description": "墙体厚度" }
+    }
+  },
+  "Door": {
+    "Parameters": {
+      "Width": { "Type": "number", "Unit": "mm", "Required": true, "Description": "门宽度" },
+      "Height": { "Type": "number", "Unit": "mm", "Required": true, "Description": "门高度" },
+      "WallId": { "Type": "string", "Required": true, "Description": "所属墙ID" }
+    }
+  }
+  // ...
+}
+```
+
+### 自动触发机制
+- 每当族库发生变更（如新增/删除/修改族或参数），系统会自动扫描所有族及其参数，生成最新的命令字典/LLM Schema。
+- 支持通过API、命令行或定时任务触发导出，保证LLM与Server端Schema实时同步。
+- 该机制与FamilyMetadata等族参数表紧密集成，族库的任何变更都会实时反映到命令字典/LLM Schema中，确保LLM和所有下游系统获取到的参数定义始终与实际族库一致。

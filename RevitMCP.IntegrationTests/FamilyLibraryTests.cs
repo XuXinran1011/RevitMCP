@@ -1,6 +1,8 @@
 using System.Threading.Tasks;
 using Xunit;
 using RevitMCP.Shared.Models;
+using System.Collections.Generic;
+using System;
 
 namespace RevitMCP.IntegrationTests
 {
@@ -14,7 +16,17 @@ namespace RevitMCP.IntegrationTests
         {
             // Arrange
             var client = new MCPTestClient();
-            var family = new FamilyMetadata { Id = "fam-001", Name = "TestFamily", Category = "Doors" };
+            var family = new FamilyMetadata(
+                "fam-001",
+                "TestFamily",
+                "Doors",
+                new List<string>(),
+                new Dictionary<string, Parameter>(),
+                null,
+                null,
+                null,
+                DateTime.Now
+            );
 
             // Act
             var addResponse = await client.SendQueryAsync(new QueryMessage

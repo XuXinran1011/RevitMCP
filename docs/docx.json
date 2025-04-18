@@ -1,0 +1,35 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dotnet/docfx/main/schemas/docfx.schema.json",
+  "metadata": [
+    {
+      "src": [
+        {
+          "src": "../RevitMCP.Plugin",
+          "files": [ "*.csproj" ]
+        },
+        {
+          "src": "../RevitMCP.Server",
+          "files": [ "*.csproj" ]
+        },
+        {
+          "src": "../RevitMCP.Shared",
+          "files": [ "*.csproj" ]
+        }
+      ],
+      "output": "api"
+    }
+  ],
+  "build": {
+    "content": [
+      { "files": [ "**/*.{md,yml}" ], "exclude": [ "_site/**" ] }
+    ],
+    "output": "_site",
+    "template": [ "default", "modern" ],
+    "globalMetadata": {
+      "_appName": "RevitMCP",
+      "_appTitle": "RevitMCP API文档",
+      "_enableSearch": true,
+      "pdf": false
+    }
+  }
+}

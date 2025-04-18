@@ -10,6 +10,44 @@
 - [7. 实现路线图](#7-实现路线图)
 - [8. 结论](#8-结论)
 
+---
+
+## 用户反馈体系架构设计
+
+### 架构分层
+- **表示层（Plugin/UI）**：负责收集和展示用户反馈，包括操作结果、错误提示、进度状态等。
+- **应用层（Server）**：负责处理反馈请求、生成反馈内容、推送反馈事件。
+- **基础设施层**：负责日志记录、反馈数据持久化、异常上报等。
+
+### 关键模块
+- **FeedbackService（Server应用层）**：生成标准化反馈消息，提供API供Plugin/UI查询或订阅反馈。
+- **FeedbackMessage（Shared层DTO）**：统一反馈消息结构，包含类型、内容、时间、关联操作ID等。
+- **FeedbackPanel（Plugin/UI）**：展示反馈信息，支持历史查询、错误详情、用户建议入口等。
+- **FeedbackLogger（基础设施层）**：将反馈事件写入日志，便于后期分析和追溯。
+
+---
+
+## 日志与监控体系架构设计
+
+### 架构分层
+- **基础设施层**：实现统一日志组件和监控采集器，支持多级别日志、结构化输出、远程上报。
+- **应用层**：埋点关键业务事件、性能指标、异常等。
+- **监控接口**：Server暴露健康检查、状态查询、性能指标API，便于外部监控系统集成。
+
+### 关键模块
+- **Logger（基础设施层）**：多级别（INFO/WARN/ERROR/DEBUG）、结构化日志、文件/远程双写。
+- **MonitoringService（Server应用层）**：采集业务指标（命令执行数、成功率、响应时延等），提供健康检查API（/health）、指标API（/metrics）。
+- **LogViewer（Plugin/UI）**：日志查询、过滤、导出等功能，便于用户和开发者排查问题。
+- **AlertManager（可选）**：关键异常、服务异常自动报警（如邮件、Webhook等）。
+
+---
+
+## 多人协作机制说明
+
+多人协作的并发与一致性问题交由Revit原生协作机制（如Revit Worksharing、Revit Server、BIM 360等）处理，RevitMCP只需对接Revit本地API，无需自行实现排队或同步机制。
+
+---
+
 ## 1. 系统概述
 
 RevitMCP (Model Context Protocol for Revit) 是一个利用大型语言模型(LLM)为Revit提供自然语言交互能力的系统。本文档详细说明了系统的架构设计、技术实现策略和项目组织结构。
@@ -822,11 +860,162 @@ public class LocalFamilyLibrary : IFamilyLibrary
 }
 ```
 
-### 4.4 变更管理模块
+### 4.4 命令字典/LLM Schema自动导出模块
+
+该模块负责自动导出和同步命令字典/LLM Schema，确保LLM与Server端参数表一致，支持自然语言驱动的智能建模。
+
+#### 4.4.1 领域模型
+
+```csharp
+// 命令Schema定义
+public class CommandSchema
+{
+    public string ElementType { get; }
+    public string FamilyName { get; }
+    public IReadOnlyDictionary<string, ParameterDefinition> Parameters { get; }
+    public DateTime LastUpdated { get; }
+
+    public CommandSchema(string elementType, string familyName, IDictionary<string, ParameterDefinition> parameters, DateTime lastUpdated)
+    {
+        ElementType = elementType;
+        FamilyName = familyName;
+        Parameters = new ReadOnlyDictionary<string, ParameterDefinition>(parameters);
+        LastUpdated = lastUpdated;
+    }
+}
+
+// 参数定义
+public class ParameterDefinition
+{
+    public string Name { get; }
+    public string Type { get; }
+    public string Unit { get; }
+    public bool Required { get; }
+    public string Description { get; }
+
+    public ParameterDefinition(string name, string type, string unit, bool required, string description)
+    {
+        Name = name;
+        Type = type;
+        Unit = unit;
+        Required = required;
+        Description = description;
+    }
+}
+```
+
+#### 4.4.2 领域服务接口
+
+```csharp
+// 命令Schema导出服务接口
+public interface ICommandSchemaExportService
+{
+    Task<IEnumerable<CommandSchema>> GetAllSchemasAsync();
+    Task ExportSchemasAsync(string outputPath, SchemaExportFormat format);
+}
+
+public enum SchemaExportFormat
+{
+    Json,
+    Markdown
+}
+```
+
+#### 4.4.3 应用服务
+
+```csharp
+// 命令Schema导出处理器
+public class CommandSchemaExportHandler
+{
+    private readonly ICommandSchemaExportService _exportService;
+
+    public CommandSchemaExportHandler(ICommandSchemaExportService exportService)
+    {
+        _exportService = exportService;
+    }
+
+    public async Task ExportAllSchemasAsync(string outputPath, SchemaExportFormat format)
+    {
+        await _exportService.ExportSchemasAsync(outputPath, format);
+    }
+}
+```
+
+#### 4.4.4 基础设施实现
+
+```csharp
+// JSON格式Schema导出实现
+public class JsonCommandSchemaExporter : ICommandSchemaExportService
+{
+    private readonly IFamilyRepository _familyRepository;
+
+    public JsonCommandSchemaExporter(IFamilyRepository familyRepository)
+    {
+        _familyRepository = familyRepository;
+    }
+
+    public async Task<IEnumerable<CommandSchema>> GetAllSchemasAsync()
+    {
+        var families = await _familyRepository.GetAllLibrariesAsync();
+        var schemas = new List<CommandSchema>();
+        foreach (var lib in families)
+        {
+            foreach (var family in lib.GetFamilies())
+            {
+                var paramDefs = family.Parameters.ToDictionary(
+                    p => p.Key,
+                    p => new ParameterDefinition(p.Key, p.Value.Type, p.Value.Unit, p.Value.Required, p.Value.Description));
+                schemas.Add(new CommandSchema(family.Category, family.Name, paramDefs, family.LastModified));
+            }
+        }
+        return schemas;
+    }
+
+    public async Task ExportSchemasAsync(string outputPath, SchemaExportFormat format)
+    {
+        var schemas = await GetAllSchemasAsync();
+        if (format == SchemaExportFormat.Json)
+        {
+            var json = JsonConvert.SerializeObject(schemas, Formatting.Indented);
+            File.WriteAllText(outputPath, json);
+        }
+        // 可扩展Markdown等格式
+    }
+}
+```
+
+#### 4.4.5 典型导出格式
+
+```json
+{
+  "Wall": {
+    "Parameters": {
+      "Length": { "Type": "number", "Unit": "mm", "Required": true, "Description": "墙体长度" },
+      "Height": { "Type": "number", "Unit": "mm", "Required": true, "Description": "墙体高度" },
+      "Thickness": { "Type": "number", "Unit": "mm", "Required": false, "Description": "墙体厚度" }
+    }
+  },
+  "Door": {
+    "Parameters": {
+      "Width": { "Type": "number", "Unit": "mm", "Required": true, "Description": "门宽度" },
+      "Height": { "Type": "number", "Unit": "mm", "Required": true, "Description": "门高度" },
+      "WallId": { "Type": "string", "Required": true, "Description": "所属墙ID" }
+    }
+  }
+  // ...
+}
+```
+
+#### 4.4.6 自动触发机制
+- 每当族库发生变更（如新增/删除/修改族或参数），系统会自动扫描所有族及其参数，生成最新的命令字典/LLM Schema。
+- 支持通过API、命令行或定时任务触发导出，保证LLM与Server端Schema实时同步。
+- 该机制与FamilyMetadata等族参数表紧密集成，族库的任何变更都会实时反映到命令字典/LLM Schema中，确保LLM和所有下游系统获取到的参数定义始终与实际族库一致。
+
+### 4.5 变更管理模块
 
 该模块负责管理Revit模型中的变更，支持变更模型分离、可视化和追踪功能。
 
-#### 4.4.1 领域模型
+#### 4.5.1 领域模型
 
 ```csharp
 // 变更范围定义
@@ -1012,7 +1201,7 @@ public class SeparationResult
 }
 ```
 
-#### 4.4.2 领域服务
+#### 4.5.2 领域服务
 
 ```csharp
 // 变更模型分离服务接口
@@ -1060,7 +1249,7 @@ public interface IElementDependencyAnalyzer
 }
 ```
 
-#### 4.4.3 应用服务
+#### 4.5.3 应用服务
 
 ```csharp
 // 变更模型分离命令处理器
@@ -1114,7 +1303,7 @@ public class ChangeSeparationCommandHandler
 }
 ```
 
-#### 4.4.4 基础设施实现
+#### 4.5.4 基础设施实现
 
 ```csharp
 // 变更模型分离服务实现
